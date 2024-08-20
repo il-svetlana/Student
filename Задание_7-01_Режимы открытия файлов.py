@@ -1,5 +1,3 @@
-from pprint import pprint
-
 class Product:
 
     def __init__(self, name, weight, category):
@@ -36,7 +34,7 @@ class Shop:
     def get_products(self):
             file = open(self.__file_name, encoding='utf-8')
             file.seek(0)
-            products = file.read().replace('\n', ', ')
+            products = file.read().replace('\n', '; ')
             file.close()
             return products
 
@@ -50,7 +48,9 @@ class Shop:
         file = open(self.__file_name, mode='a', encoding='utf-8')
         for new_product in products:
             if new_product in new_list:
-                file.write('\n' + new_product.name)
+                file.write(f'\n{new_product.name}, '
+                           f'{new_product.weight}, '
+                           f'{new_product.category}')
             else:
                 print(f'Продукт {new_product.name} уже есть в магазине')
         file.close()
